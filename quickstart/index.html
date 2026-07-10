@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Quickstart - Suite3D</title>
+<meta name="description" content="Fast, volumetric cell detection for multi-plane two-photon imaging">
+<link rel="stylesheet" href="/static/site.css">
+<link rel="stylesheet" href="/static/pygments.css">
+<link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+<div class="page">
+
+<div class="masthead">
+  <div class="title"><a href="/">Suite3D</a></div>
+  <div class="sub">Fast, volumetric cell detection for multi-plane two-photon imaging</div>
+  <div class="sitenav">
+      <a href="/quickstart/" aria-current="page">Quickstart</a>
+      <a href="/demos/">Demos</a>
+      <a href="/paper/">Paper</a>
+      <a href="https://github.com/alihaydaroglu/suite3d">GitHub</a>
+  </div>
+</div>
+
+<h1 id="quickstart">Quickstart</h1>
+<h2 id="1-install">1. Install</h2>
+<p>Suite3D is not on PyPI. Install from git:</p>
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>git+https://github.com/alihaydaroglu/suite3d.git
+pip<span class="w"> </span>install<span class="w"> </span><span class="s1">&#39;cupy-cuda12x&gt;=13.0,&lt;14.0&#39;</span>
+</code></pre></div>
+
+<p>A GPU is used for registration. There is a CPU fallback, but it is much slower.</p>
+<p>Pin cupy to the 13.x line.</p>
+<p>For the napari viewer, also <code>pip install 'suite3d[viz]'</code>.</p>
+<h2 id="2-get-the-data">2. Get the data</h2>
+<p>The demo datasets are on figshare:
+<a href="https://rdr.ucl.ac.uk/articles/dataset/Volumetric_2-photon_imaging_datasets_used_to_test_Suite3D/32956220">Volumetric 2-photon imaging datasets used to test Suite3D</a>.</p>
+<p>Download a dataset and unpack it. <code>--data-root</code> expects:</p>
+<div class="highlight"><pre><span></span><code>&lt;data-root&gt;/
+    v1/raw/*.tif
+    hippocampus/raw/*.tif
+    lbm/raw/*.tif
+    manifest.json
+</code></pre></div>
+
+<p>It also accepts a single dataset folder (<code>.../v1</code>) or its <code>raw/</code> directory, if you
+only downloaded one.</p>
+<h2 id="3-run-a-demo">3. Run a demo</h2>
+<div class="highlight"><pre><span></span><code>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/alihaydaroglu/suite3d.git
+<span class="nb">cd</span><span class="w"> </span>suite3d/demos/01-v1-tc030
+python<span class="w"> </span>run_pipeline.py<span class="w"> </span>--data-root<span class="w"> </span>/path/to/data<span class="w"> </span>--out-dir<span class="w"> </span>./results
+</code></pre></div>
+
+<p>This writes a job directory at <code>./results/s3d-demo-v1/</code>, exports the results, and
+opens a viewer.</p>
+<div class="highlight"><pre><span></span><code>--viewer<span class="w"> </span>html<span class="w">      </span><span class="c1"># portable offline browser (default)</span>
+--viewer<span class="w"> </span>napari<span class="w">    </span><span class="c1"># desktop 3D viewer</span>
+--viewer<span class="w"> </span>none
+</code></pre></div>
+
+<p>Stages can be skipped to reuse what is already on disk:</p>
+<div class="highlight"><pre><span></span><code>python<span class="w"> </span>run_pipeline.py<span class="w"> </span>--out-dir<span class="w"> </span>./results<span class="w"> </span><span class="se">\</span>
+<span class="w">    </span>--skip-init<span class="w"> </span>--skip-register<span class="w"> </span>--skip-corrmap<span class="w"> </span>--viewer<span class="w"> </span>napari
+</code></pre></div>
+
+<h2 id="4-what-to-expect">4. What to expect</h2>
+<p>Registration dominates. Plan for disk, not just time.</p>
+<div class="scrollx">
+<table>
+<thead>
+<tr>
+<th>demo</th>
+<th>download</th>
+<th>registered movie</th>
+<th>wall time (GPU)</th>
+<th>ROIs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>01 V1</td>
+<td>21.1 GB</td>
+<td>~21 GB</td>
+<td>tens of minutes</td>
+<td>~845</td>
+</tr>
+<tr>
+<td>02 LBM</td>
+<td>56.2 GB</td>
+<td>~38 GB</td>
+<td>hours; registration alone ~35 min</td>
+<td>~40k</td>
+</tr>
+<tr>
+<td>03 hippocampus</td>
+<td>21.1 GB</td>
+<td>~21 GB</td>
+<td>tens of minutes; registration ~12 min</td>
+<td>~1,347</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Demo 04 reuses demo 03's job directory.</p>
+<h2 id="easy-to-get-wrong">Easy to get wrong</h2>
+<p><code>fs</code> is the <strong>volume</strong> rate, not the plane rate.</p>
+
+</div>
+<footer>
+  Suite3D &middot; <a href="https://github.com/alihaydaroglu/suite3d">source</a></footer>
+</body>
+</html>
