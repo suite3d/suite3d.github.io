@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mouse V1 - Suite3D</title>
+<meta name="description" content="Fast, volumetric cell detection for multi-plane two-photon imaging">
+<link rel="stylesheet" href="/static/site.css">
+<link rel="stylesheet" href="/static/pygments.css">
+<link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+<div class="page">
+
+<div class="masthead">
+  <div class="title"><a href="/">Suite3D</a></div>
+  <div class="sub">Fast, volumetric cell detection for multi-plane two-photon imaging</div>
+  <div class="sitenav">
+      <a href="/quickstart/">Quickstart</a>
+      <a href="/demos/" aria-current="page">Demos</a>
+      <a href="/algorithms/">Algorithms</a>
+      <a href="/paper/">Paper</a>
+      <a href="https://github.com/alihaydaroglu/suite3d">GitHub</a>
+  </div>
+</div>
+
+<div class="demohdr">
+  <h1>Mouse V1</h1>
+  <div class="meta">7 planes · 512×518 · standard resonant two-photon</div>
+</div>
+<div class="subnav">
+    <a href="/demos/01-v1-tc030/" aria-current="page">Walkthrough</a>
+    <a href="/demos/01-v1-tc030/results/">3D result</a>
+    <a href="/demos/01-v1-tc030/movies/">Processing steps</a>
+</div>
+<p class="nblinks">
+  <a href="/demos/01-v1-tc030/walkthrough.ipynb" download>Download notebook</a> &middot;
+  <a href="/demos/01-v1-tc030/walkthrough.html">Open standalone</a> &middot;
+  <a href="https://github.com/alihaydaroglu/suite3d/tree/main/demos/01-v1-tc030">View on GitHub</a>
+</p>
+<iframe id="nbframe" class="nbframe" src="/demos/01-v1-tc030/walkthrough.html"
+        title="Mouse V1 walkthrough notebook" ></iframe>
+<script>
+  // Same origin, so the page can read the notebook's height and size the frame to it.
+  // Without this the notebook scrolls inside a box, which reads as an embedded widget.
+  (function () {
+    var f = document.getElementById("nbframe");
+    function fit() {
+      try {
+        var d = f.contentDocument;
+        if (d && d.body) f.style.height = (d.documentElement.scrollHeight + 24) + "px";
+      } catch (e) { /* different origin: leave the default height */ }
+    }
+    f.addEventListener("load", function () { fit(); setTimeout(fit, 300); });
+    window.addEventListener("resize", fit);
+  })();
+</script>
+
+</div>
+<footer>
+  Suite3D &middot; <a href="https://github.com/alihaydaroglu/suite3d">source</a></footer>
+</body>
+</html>

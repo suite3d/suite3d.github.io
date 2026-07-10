@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mouse V1 - Suite3D</title>
+<meta name="description" content="Fast, volumetric cell detection for multi-plane two-photon imaging">
+<link rel="stylesheet" href="/static/site.css">
+<link rel="stylesheet" href="/static/pygments.css">
+<link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+<div class="page wide">
+
+<div class="masthead">
+  <div class="title"><a href="/">Suite3D</a></div>
+  <div class="sub">Fast, volumetric cell detection for multi-plane two-photon imaging</div>
+  <div class="sitenav">
+      <a href="/quickstart/">Quickstart</a>
+      <a href="/demos/" aria-current="page">Demos</a>
+      <a href="/algorithms/">Algorithms</a>
+      <a href="/paper/">Paper</a>
+      <a href="https://github.com/alihaydaroglu/suite3d">GitHub</a>
+  </div>
+</div>
+
+<div class="demohdr">
+  <h1>Mouse V1</h1>
+  <div class="meta">7 planes · 512×518 · standard resonant two-photon</div>
+</div>
+<div class="subnav">
+    <a href="/demos/01-v1-tc030/">Walkthrough</a>
+    <a href="/demos/01-v1-tc030/results/">3D result</a>
+    <a href="/demos/01-v1-tc030/movies/" aria-current="page">Processing steps</a>
+</div>
+<div class="steps">
+  <figure class="panel" data-movie="registered">
+    <div class="stage" style="aspect-ratio: 514 / 515">
+      <div class="zoom">
+        <img class="movie" alt="Motion-corrected movie">
+        <canvas class="overlay" width="514" height="515"></canvas>
+      </div>
+    </div>
+    <figcaption>
+      <b>Motion-corrected</b>
+      <span class="sub" data-role="caption"></span>
+      <button class="roi-toggle" type="button" aria-pressed="false">ROIs</button>
+    </figcaption>
+  </figure>
+
+  <figure class="panel" data-movie="mov_sub">
+    <div class="stage" style="aspect-ratio: 514 / 515">
+      <div class="zoom">
+        <img class="movie" alt="Detection movie">
+        <canvas class="overlay" width="514" height="515"></canvas>
+      </div>
+    </div>
+    <figcaption>
+      <b>Detection (mov_sub)</b>
+      <span class="sub" data-role="caption"></span>
+      <button class="roi-toggle" type="button" aria-pressed="false">ROIs</button>
+    </figcaption>
+  </figure>
+
+  <figure class="panel" data-movie="corrmap">
+    <div class="stage" style="aspect-ratio: 514 / 515">
+      <div class="zoom">
+        <img class="movie" alt="Correlation map">
+        <canvas class="overlay" width="514" height="515"></canvas>
+      </div>
+    </div>
+    <figcaption>
+      <b>Correlation map</b>
+      <span class="sub" data-role="caption"></span>
+      <button class="roi-toggle" type="button" aria-pressed="true">ROIs</button>
+    </figcaption>
+  </figure>
+</div>
+
+<div class="ctrl">
+  <button id="play" type="button">Play</button>
+  <label for="frame">time</label>
+  <input type="range" id="frame" min="0" max="59" value="0" step="1">
+  <output id="fout"></output>
+  <label for="fps">fps</label>
+  <select id="fps"><option>6</option><option selected>12</option><option>24</option></select>
+</div>
+
+<div class="ctrl">
+  <label for="plane">plane</label>
+  <input type="range" id="plane" min="0" max="6"
+         value="3" step="1">
+  <output id="zout"></output>
+  <button id="home" type="button" disabled>Reset zoom</button>
+  <output id="zoomout"></output>
+  <span class="sub" id="preload"></span>
+</div>
+
+<div class="note">
+  Scroll to zoom, drag to pan &mdash; all three panels move together. Click a cell to
+  select it. Arrow keys step time (&larr; &rarr;) and plane (&uarr; &darr;);
+  <kbd>0</kbd> resets the zoom.
+</div>
+
+<h2>Rigid motion</h2>
+<canvas id="shifts" class="plot" height="240"></canvas>
+<div class="note">
+  Rigid shift applied to each volume, in voxels. The marker follows the scrubber. Blocked
+  non-rigid shifts are estimated on top of these and are not plotted.
+</div>
+
+<h2>Traces</h2>
+<div id="tracehdr" class="sub">Click a cell in any panel above.</div>
+<canvas id="traces" class="plot" height="240"></canvas>
+<div class="note">
+  Neuropil-corrected fluorescence (<code>F &minus; 0.7 &times; Fneu</code>) and the
+  deconvolved trace (<code>spks</code>), as written by the pipeline.
+</div>
+
+<div class="note">
+  <code>mov_sub</code> is time-binned by the pipeline: one bin is 6 volumes.
+  Both panels are averaged over the same window, so they show the same instant. One step of
+  the time slider is 1.80 s, and the clip
+  covers the first
+  108 s of the recording.
+</div>
+
+<script>window.STEPS = {"n_frames": 60, "nz": 7, "stride": 6, "display_bin": 1, "vol_per_frame": 6, "ext": "jpg", "fs_vol": 3.335425084175085, "nt": 2222, "downsample": 1, "ny": 515, "nx": 514, "frame_ny": 515, "frame_nx": 514, "corrmap": true, "shifts": true, "rois": true, "n_roi": 845, "n_traced": 845, "chunk_rois": 128, "trace_nt": 2222};</script>
+<script src="/static/steps.js"></script>
+
+</div>
+<footer>
+  Suite3D &middot; <a href="https://github.com/alihaydaroglu/suite3d">source</a></footer>
+</body>
+</html>

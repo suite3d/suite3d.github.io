@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Paper - Suite3D</title>
+<meta name="description" content="Fast, volumetric cell detection for multi-plane two-photon imaging">
+<link rel="stylesheet" href="/static/site.css">
+<link rel="stylesheet" href="/static/pygments.css">
+<link rel="icon" href="/static/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+<div class="page">
+
+<div class="masthead">
+  <div class="title"><a href="/">Suite3D</a></div>
+  <div class="sub">Fast, volumetric cell detection for multi-plane two-photon imaging</div>
+  <div class="sitenav">
+      <a href="/quickstart/">Quickstart</a>
+      <a href="/demos/">Demos</a>
+      <a href="/algorithms/">Algorithms</a>
+      <a href="/paper/" aria-current="page">Paper</a>
+      <a href="https://github.com/alihaydaroglu/suite3d">GitHub</a>
+  </div>
+</div>
+
+<h1>Paper</h1>
+
+<p>A citation will be added here once the paper is published.</p>
+
+<h2>Code availability</h2>
+<p>
+  Suite3D is free software, released under the
+  <a href="https://github.com/alihaydaroglu/suite3d/blob/main/LICENSE">AGPL-3.0-or-later</a> licence.
+  The source, the demo notebooks and the analysis in this site are all in one repository:
+</p>
+<p><a href="https://github.com/alihaydaroglu/suite3d">https://github.com/alihaydaroglu/suite3d</a></p>
+<div class="highlight"><pre>pip install git+https://github.com/alihaydaroglu/suite3d.git</pre></div>
+<p>
+  See the <a href="/quickstart/">quickstart</a> for the GPU requirements and
+  for running a demo end to end.
+</p>
+
+<h2>Data availability</h2>
+<p>
+  The three example recordings used by the <a href="/demos/">demos</a> are
+  deposited on figshare. The demos do not download anything: unpack the archive and point
+  <code>--data-root</code> at the folder.
+</p>
+<p>The deposit is not public yet; its DOI will be linked here on publication.</p>
+
+<div class="scrollx">
+<table>
+  <thead><tr><th>Dataset</th><th><code>--data-root</code> folder</th><th>Download</th><th></th></tr></thead>
+  <tbody>
+    <tr>
+      <td>V1</td>
+      <td><code>v1/raw/*.tif</code></td>
+      <td>21.1 GB</td>
+      <td>Mouse V1, 7 planes, standard resonant two-photon</td>
+    </tr>
+    <tr>
+      <td>LBM</td>
+      <td><code>lbm/raw/*.tif</code></td>
+      <td>56.2 GB</td>
+      <td>Light-bead microscopy, 22 planes</td>
+    </tr>
+    <tr>
+      <td>Hippocampus</td>
+      <td><code>hippocampus/raw/*.tif</code></td>
+      <td>21.1 GB</td>
+      <td>Dense, low-contrast, 4 planes</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p>
+  Every result on this site &mdash; the
+  <a href="/demos/01-v1-tc030/movies/">processing-steps</a> panels, the ROI
+  traces and the 3D viewers &mdash; is produced from these recordings by the pipeline in the
+  repository above, at the parameters recorded in each demo's notebook.
+</p>
+
+</div>
+<footer>
+  Suite3D &middot; <a href="https://github.com/alihaydaroglu/suite3d">source</a></footer>
+</body>
+</html>
